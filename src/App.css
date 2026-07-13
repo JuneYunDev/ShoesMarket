@@ -6,6 +6,11 @@
   --red: #bd0b0b;
 }
 
+body {
+  margin: 0;
+  font-family: "Koh Santepheap", serif;
+}
+
 .page-width {
   width: min(var(--page-width), calc(100% - 40px));
   margin-inline: auto;
@@ -14,6 +19,7 @@
 /* Header */
 .site-header {
   background: #fff;
+  margin-top: 1%;
 }
 
 .header-main {
@@ -247,15 +253,26 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
-  gap: 60px;
+  grid-template-columns: repeat(3, max-content);
+  align-items: start;
+  justify-content: center;
+  column-gap: clamp(100px, 20vw, 180px);
   padding-top: 52px;
   padding-bottom: 60px;
+  text-align: center;
+}
+
+.footer-column {
+  width: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .footer-column h2 {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 9px;
   margin: 0 0 12px;
   font-size: clamp(1.55rem, 2.6vw, 2.2rem);
@@ -267,18 +284,16 @@
   font-size: 1.25rem;
   line-height: 1.3;
   font-weight: 700;
+  text-align: left;
 }
 
 .footer-column p a:hover {
   text-decoration: underline;
 }
 
-.follow-icon {
-  font-size: 1.4rem;
-}
-
 .social-links {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 18px;
   margin: 8px 0 14px;
@@ -336,10 +351,6 @@
   .trend-card img {
     min-height: 320px;
   }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media (max-width: 650px) {
@@ -386,6 +397,6 @@
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 40px;
   }
 }

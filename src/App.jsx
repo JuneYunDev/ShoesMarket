@@ -5,6 +5,7 @@ import {
   Search,
   ShoppingCart,
   UserRound,
+  Newspaper,
 } from "lucide-react";
 
 import {
@@ -140,12 +141,12 @@ const DealsSection = () => (
 
 const Footer = () => (
   <footer className="site-footer">
-    <a className="bact-to-top" href="#top">
+    <a className="back-to-top" href="#top">
       <ArrowUp size={24} />
       <span>Bact To Top</span>
     </a>
 
-    <div className="page-with fotter-grid">
+    <div className="page-with footer-grid">
       <section className="footer-column">
         <h2>
           <MapPin aria-hidden="true" />
@@ -178,11 +179,9 @@ const Footer = () => (
         </p>
       </section>
 
-      <section className="fotter-column">
+      <section className="footer-column">
         <h2>
-          <span className="follow-icon" aria-hidden="true">
-            ▣
-          </span>
+          <Newspaper aria-hidden="true" />
           Follow Up
         </h2>
 
