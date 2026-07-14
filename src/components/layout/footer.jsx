@@ -8,6 +8,8 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 
+import "./footer.css";
+
 const Footer = () => {
   return (
     <footer className="site-footer">

@@ -1,7 +1,7 @@
 import Header from "../../components/layout/header.jsx";
 import Footer from "../../components/layout/footer.jsx";
 
-import "./HomePage.css";
+import "./homePage.css";
 
 const trends = [
   {
@@ -56,7 +56,7 @@ const Hero = () => {
 
         <div className="hero-image-wrap">
           <img
-            src="/images/hero-shoe.png"
+            src="/images/hero-shoe.jpg"
             alt="Black formal shoe with a brown sole"
           />
         </div>

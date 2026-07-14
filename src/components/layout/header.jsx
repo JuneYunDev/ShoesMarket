@@ -1,5 +1,7 @@
 import { Search, ShoppingCart, UserRound } from "lucide-react";
 
+import "./header.css";
+
 const navigationItems = ["Women", "Men", "Kids", "Brand", "Trend", "Deals"];
 
 const Header = () => {
