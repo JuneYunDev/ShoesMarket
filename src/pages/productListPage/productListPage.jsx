@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { ChevronUp, Search, SlidersHorizontal } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 
 import ProductCard from "../../components/products/ProductCard";
 import Header from "../../components/layout/Header";
@@ -12,6 +13,15 @@ const sizeOptions = [
   1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
   10.5, 11, 11.5, 12,
 ];
+
+const pageTitles = {
+  women: "Women's Shoes",
+  men: "Men's Shoes",
+  kids: "Kid's Shoes",
+  brand: "Brand Shoes",
+  trend: "Trending Shoes",
+  deals: "Special Deals",
+};
 
 const sortOptions = [
   "Featured",
@@ -32,6 +42,13 @@ const ProductListPage = () => {
   const [favorites, setFavorites] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category")?.toLowerCase();
+  const pageTitle = pageTitles[category] ?? "All Shoes";
+
+  console.log("URL:", window.location.href);
+  console.log("category:", category);
+  console.log("pageTitle:", pageTitle);
 
   const filteredProducts = useMemo(() => {
     let result = [...products];
@@ -86,7 +103,7 @@ const ProductListPage = () => {
       <Header />
 
       <main className="product-list-page">
-        <h1>Women's Shoes</h1>
+        <h1>{pageTitle}</h1>
 
         <section className="filters">
           <div className="filters__heading">

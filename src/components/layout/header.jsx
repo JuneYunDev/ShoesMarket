@@ -18,7 +18,7 @@ const navigationItems = [
   },
   {
     title: "Brand",
-    path: "/products?category=brands",
+    path: "/products?category=brand",
   },
   {
     title: "Trend",
@@ -34,9 +34,9 @@ const Header = () => {
   return (
     <header className="site-header">
       <div className="header-main page-width">
-        <a className="logo" href="/">
+        <Link className="logo" to="/">
           Shoes Market
-        </a>
+        </Link>
 
         <form className="search-form" role="search">
           <label className="sr-only" htmlFor="header-search">
@@ -55,15 +55,15 @@ const Header = () => {
         </form>
 
         <div className="header-actions">
-          <a href="#signin">
+          <Link href="#signin">
             <UserRound size={21} />
             <span>Sign in</span>
-          </a>
+          </Link>
 
-          <a href="#cart">
+          <Link href="#cart">
             <ShoppingCart size={22} />
             <span>Cart</span>
-          </a>
+          </Link>
         </div>
       </div>
 
