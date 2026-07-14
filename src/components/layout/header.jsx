@@ -1,8 +1,34 @@
 import { Search, ShoppingCart, UserRound } from "lucide-react";
 
+import { Link } from "react-router-dom";
 import "./header.css";
 
-const navigationItems = ["Women", "Men", "Kids", "Brand", "Trend", "Deals"];
+const navigationItems = [
+  {
+    title: "Women",
+    path: "/products?category=women",
+  },
+  {
+    title: "Men",
+    path: "/products?category=men",
+  },
+  {
+    title: "Kids",
+    path: "/products?category=kids",
+  },
+  {
+    title: "Brand",
+    path: "/products?category=brands",
+  },
+  {
+    title: "Trend",
+    path: "/trend",
+  },
+  {
+    title: "Deals",
+    path: "/deals",
+  },
+];
 
 const Header = () => {
   return (
@@ -44,9 +70,9 @@ const Header = () => {
       <nav className="main-nav">
         <div className="nav-inner">
           {navigationItems.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`}>
-              {item}
-            </a>
+            <Link key={item.title} to={item.path}>
+              {item.title}
+            </Link>
           ))}
         </div>
       </nav>
