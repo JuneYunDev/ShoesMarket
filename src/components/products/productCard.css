@@ -1,0 +1,147 @@
+.product-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+  object-fit: contain;
+  transition: transform 180ms ease;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.035);
+}
+
+.product-card__favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+
+  width: 35px;
+  height: 35px;
+  padding: 0;
+
+  color: #222;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.product-card__favorite:hover {
+  background-color: #ededed;
+}
+
+.product-card__favorite--active {
+  color: #c40000;
+}
+
+.product-card__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-top: 12px;
+}
+
+.product-card__name {
+  margin: 0 0 7px;
+  font-size: 0.94rem;
+  line-height: 1.3;
+  font-weight: 900;
+}
+
+.product-card__price-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.product-card__price {
+  color: #111;
+  font-size: 0.94rem;
+  font-weight: 900;
+}
+
+.product-card__price--sale,
+.product-card__discount {
+  color: #c80000;
+}
+
+.product-card__discount {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.product-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.product-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.product-card__star {
+  color: #b8b8b8;
+}
+
+.product-card__star--active {
+  color: #050505;
+}
+
+.product-card__reviews {
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.product-card__cart-button {
+  width: 100%;
+  min-height: 38px;
+  margin-top: auto;
+
+  color: #111;
+  background-color: #fff;
+  border: 1px solid #444;
+  border-radius: 3px;
+
+  font-size: 0.95rem;
+  font-weight: 900;
+
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.product-card__cart-button:hover {
+  color: #fff;
+  background-color: #111;
+}
+
+.product-card__cart-button:focus-visible,
+.product-card__favorite:focus-visible {
+  outline: 3px solid #777;
+  outline-offset: 2px;
+}
