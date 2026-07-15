@@ -200,6 +200,24 @@
   font-size: 1rem;
 }
 
+.account-card--recovery {
+  max-width: 760px;
+}
+
+.account-form__success {
+  margin: -4px 0 20px;
+  padding: 14px 16px;
+
+  color: #1d5f24;
+  background-color: #eef8ef;
+  border: 1px solid #a8cfac;
+  border-radius: 6px;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
 /* Sign-up card spacing */
 
 .account-card--signup .account-form__field {
