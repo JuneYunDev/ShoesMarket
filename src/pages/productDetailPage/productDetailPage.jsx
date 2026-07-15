@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Heart, Star } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
+import Header from "../../components/layout/header";
+import Footer from "../../components/layout/footer";
 import { shoesData } from "../../data/shoesData";
 
-import "./ProductDetailPage.css";
+import "./productDetailPage.css";
 
 const ProductDetailPage = () => {
   const { productId } = useParams();

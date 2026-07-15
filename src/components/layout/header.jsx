@@ -55,7 +55,7 @@ const Header = () => {
         </form>
 
         <div className="header-actions">
-          <Link href="#signin">
+          <Link to="signin">
             <UserRound size={21} />
             <span>Sign in</span>
           </Link>

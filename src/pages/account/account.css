@@ -1,0 +1,268 @@
+.account-page {
+  width: 100%;
+}
+
+.account-page__title {
+  margin: 0;
+  padding: 28px 20px 30px;
+
+  text-align: center;
+  font-size: clamp(2.3rem, 4vw, 3.5rem);
+  line-height: 1.2;
+}
+
+.account-page__background {
+  min-height: 690px;
+  padding: 130px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  background-color: #e9e7e7;
+}
+
+.account-card {
+  width: min(100%, 980px);
+  padding: 68px 100px;
+
+  background-color: #fff;
+}
+
+.account-card--login {
+  max-width: 980px;
+}
+
+.account-card--signup {
+  max-width: 920px;
+}
+
+.account-form {
+  width: 100%;
+  margin-inline: auto;
+
+  font-family: Arial, sans-serif;
+}
+
+.account-form__heading {
+  margin-bottom: 18px;
+}
+
+.account-form__heading h2 {
+  margin: 0 0 13px;
+
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.account-form__heading p {
+  margin: 0;
+
+  font-size: 1.18rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.account-form__field {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 22px;
+}
+
+.account-form__field input {
+  width: 100%;
+  min-height: 66px;
+  padding: 0 20px;
+
+  color: #111;
+  background-color: #fff;
+
+  border: 1px solid #111;
+  border-radius: 8px;
+
+  font-size: 1.35rem;
+  outline: 3px solid transparent;
+  outline-offset: 1px;
+}
+
+.account-form__field input::placeholder {
+  color: #222;
+  opacity: 1;
+}
+
+.account-form__field input:focus {
+  outline-color: #777;
+}
+
+.account-form__field--password {
+  position: relative;
+}
+
+.account-form__field--password input {
+  padding-right: 65px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+
+  width: 38px;
+  height: 38px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: #000;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+}
+
+.password-toggle:hover {
+  background-color: #eee;
+}
+
+.password-toggle:focus-visible {
+  outline: 3px solid #777;
+  outline-offset: 2px;
+}
+
+.account-form__name-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.account-form__links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+
+  margin-top: -2px;
+  margin-bottom: 54px;
+}
+
+.account-form__links a,
+.account-form__switch a {
+  color: #003ac3;
+  text-decoration: underline;
+}
+
+.account-form__links a {
+  font-size: 1.15rem;
+}
+
+.account-form__submit {
+  width: 100%;
+  min-height: 66px;
+
+  color: #fff;
+  background-color: #000;
+
+  border: 1px solid #000;
+  border-radius: 7px;
+
+  font-size: 1.4rem;
+  font-weight: 800;
+
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.account-form__submit:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.account-form__submit:focus-visible {
+  outline: 3px solid #777;
+  outline-offset: 3px;
+}
+
+.account-form__error {
+  margin: -4px 0 18px;
+
+  color: #c60000;
+
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.account-form__switch {
+  margin: 24px 0 0;
+
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Sign-up card spacing */
+
+.account-card--signup .account-form__field {
+  margin-bottom: 20px;
+}
+
+.account-card--signup .account-form__submit {
+  margin-top: 2px;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .account-page__background {
+    min-height: 620px;
+    padding: 80px 24px;
+  }
+
+  .account-card {
+    padding: 55px 60px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .account-page__title {
+    padding: 22px 16px;
+  }
+
+  .account-page__background {
+    min-height: auto;
+    padding: 35px 14px 55px;
+  }
+
+  .account-card {
+    padding: 36px 22px;
+  }
+
+  .account-form__name-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .account-form__field input {
+    min-height: 58px;
+    font-size: 1.1rem;
+  }
+
+  .account-form__heading p {
+    font-size: 1rem;
+  }
+
+  .account-form__links {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-bottom: 35px;
+  }
+
+  .account-form__submit {
+    min-height: 58px;
+    font-size: 1.2rem;
+  }
+}
