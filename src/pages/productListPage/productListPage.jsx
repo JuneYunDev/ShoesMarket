@@ -46,10 +46,6 @@ const ProductListPage = () => {
   const category = searchParams.get("category")?.toLowerCase();
   const pageTitle = pageTitles[category] ?? "All Shoes";
 
-  console.log("URL:", window.location.href);
-  console.log("category:", category);
-  console.log("pageTitle:", pageTitle);
-
   const filteredProducts = useMemo(() => {
     let result = [...products];
 

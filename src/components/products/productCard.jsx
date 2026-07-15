@@ -1,4 +1,5 @@
 import { Heart, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./productCard.css";
 
 const ProductCard = ({ shoe, isFavorite, onToggleFavorite, onAddToCart }) => {
@@ -42,12 +43,19 @@ const ProductCard = ({ shoe, isFavorite, onToggleFavorite, onAddToCart }) => {
           <Heart size={21} fill={isFavorite ? "currentColor" : "none"} />
         </button>
 
-        <img className="product-card__image" src={image} alt={name} />
+        <Link
+          className="product-card__image-link"
+          to={`/products/${id}`}
+          aria-label={`View ${name}`}
+        >
+          <img className="product-card__image" src={image} alt={name} />
+        </Link>
       </div>
 
       <div className="product-card__content">
-        <h3 className="product-card__name">{name}</h3>
-
+        <Link className="product-card__name-link" to={`/products/${id}`}>
+          <h3 className="product-card__name">{name}</h3>
+        </Link>
         <div className="product-card__price-row">
           <span
             className={
