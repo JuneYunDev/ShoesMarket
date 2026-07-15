@@ -1,6 +1,9 @@
 import Header from "../../components/layout/header.jsx";
 import Footer from "../../components/layout/footer.jsx";
 
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import "./homePage.css";
 
 const trends = [
@@ -103,6 +106,38 @@ const DealsSection = () => {
 };
 
 const HomePage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      return;
+    }
+
+    const sectionId = location.hash.replace("#", "");
+
+    const scrollToSection = () => {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    };
+
+    const frameId = window.requestAnimationFrame(scrollToSection);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [location.hash]);
+
   return (
     <div id="top">
       <Header />

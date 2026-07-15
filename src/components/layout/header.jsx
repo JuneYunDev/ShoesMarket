@@ -22,11 +22,11 @@ const navigationItems = [
   },
   {
     title: "Trend",
-    path: "/trend",
+    path: "/#trend",
   },
   {
     title: "Deals",
-    path: "/deals",
+    path: "/#deals",
   },
 ];
 
