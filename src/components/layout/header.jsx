@@ -60,7 +60,7 @@ const Header = () => {
             <span>Sign in</span>
           </Link>
 
-          <Link href="#cart">
+          <Link to="/cart">
             <ShoppingCart size={22} />
             <span>Cart</span>
           </Link>

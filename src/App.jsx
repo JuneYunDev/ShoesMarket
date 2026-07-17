@@ -7,6 +7,7 @@ import LoginPage from "./pages/account/loginPage.jsx";
 import SignUpPage from "./pages/account/signUpPage.jsx";
 import ForgotPasswordPage from "./pages/account/forgotPasswordPage.jsx";
 import ForgotEmailPage from "./pages/account/forgotEmailPage.jsx";
+import CartPage from "./pages/CartPage/cartPage.jsx";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/forgot-email" element={<ForgotEmailPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
   );
