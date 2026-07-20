@@ -3,7 +3,7 @@ import { Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/layout/Header";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../context/cartContext";
 
 import "./CartPage.css";
 
