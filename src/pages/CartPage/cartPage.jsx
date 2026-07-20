@@ -56,7 +56,9 @@ const CartPage = () => {
     }, 0);
   }, [checkedCartItem]);
 
-  const deliveryFee = deliveryType === "quick" ? 15.99 : 7.99;
+  const hasItems = checkedCartItem.length > 0;
+
+  const deliveryFee = hasItems ? (deliveryType === "quick" ? 15.99 : 7.99) : 0;
 
   const orderTotal = subtotal + deliveryFee;
 
