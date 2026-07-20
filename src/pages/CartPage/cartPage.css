@@ -62,21 +62,29 @@
 
 .cart-item__image-container {
   width: 100%;
-  height: 230px;
+  height: 240px;
 
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  overflow: hidden;
+  overflow: visible;
   background-color: #fff;
 }
 
 .cart-item__image {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 90%;
+  max-height: 210px;
+
+  padding: 0;
 
   object-fit: contain;
+  object-position: center;
 }
 
 .cart-item__information {
