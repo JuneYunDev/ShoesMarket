@@ -1,39 +1,27 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/layout/Header";
-import { shoesData } from "../../data/shoesData";
+import { useCart } from "../../context/CartContext";
 
 import "./CartPage.css";
 
 const CartPage = () => {
   const navigate = useNavigate();
 
-  const { cartItems, removeFromCart, updateQuantity, totalQuantity, subtotal } =
-    useCart();
+  const { cartItems, removeFromCart, totalQuantity, subtotal } = useCart();
 
   const [deliveryType, setDeliveryType] = useState("standard");
 
-  const hasItems = checkedCartItem.length > 0;
+  const hasItems = cartItems.length > 0;
 
   const deliveryFee = hasItems ? (deliveryType === "quick" ? 15.99 : 7.99) : 0;
 
   const orderTotal = subtotal + deliveryFee;
 
-  const totalQuantity = checkedCartItem.reduce(
-    (total, cartItem) => total + cartItem.quantity,
-    0,
-  );
-
-  const handleRemoveFromCart = (cartItemId) => {
-    setCartItems((currentCartItems) =>
-      currentCartItems.filter((cartItem) => cartItem.cartItemId !== cartItemId),
-    );
-  };
-
   const handleCheckout = () => {
-    if (checkedCartItem.length === 0) {
+    if (!hasItems) {
       window.alert("Your cart is empty.");
       return;
     }
@@ -51,7 +39,7 @@ const CartPage = () => {
         <section className="cart-page__background">
           <div className="cart-layout">
             <section className="cart-items-panel">
-              {cartItems.length > 0 ? (
+              {hasItems ? (
                 <div className="cart-items-list">
                   {cartItems.map((cartItem) => {
                     const { product } = cartItem;
@@ -91,18 +79,16 @@ const CartPage = () => {
                           </div>
 
                           <p>
-                            Size : {cartItem.selectedSize}{" "}
+                            Size: {cartItem.selectedSize}{" "}
                             {cartItem.selectedWidth}
                           </p>
 
-                          <p>Quantity : {cartItem.quantity}</p>
+                          <p>Quantity: {cartItem.quantity}</p>
 
                           <button
                             className="cart-item__remove-button"
                             type="button"
-                            onClick={() =>
-                              handleRemoveFromCart(cartItem.cartItemId)
-                            }
+                            onClick={() => removeFromCart(cartItem.cartItemId)}
                           >
                             Remove from Cart
                           </button>
@@ -164,10 +150,12 @@ const CartPage = () => {
                     value="standard"
                     checked={deliveryType === "standard"}
                     onChange={(event) => setDeliveryType(event.target.value)}
+                    disabled={!hasItems}
                   />
 
                   <span>
                     <strong>Standard Delivery</strong>
+
                     <small>Arrives in 4 to 7 Business Days</small>
                   </span>
                 </label>
@@ -179,10 +167,12 @@ const CartPage = () => {
                     value="quick"
                     checked={deliveryType === "quick"}
                     onChange={(event) => setDeliveryType(event.target.value)}
+                    disabled={!hasItems}
                   />
 
                   <span>
                     <strong>Quick Delivery</strong>
+
                     <small>Arrives in 1 to 3 Business Days</small>
                   </span>
                 </label>
