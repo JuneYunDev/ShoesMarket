@@ -4,12 +4,14 @@ import { Link, useParams } from "react-router-dom";
 
 import Header from "../../components/layout/header";
 import Footer from "../../components/layout/footer";
+import { useCart } from "../../context/cartContext";
 import { shoesData } from "../../data/shoesData";
 
 import "./productDetailPage.css";
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
+  const { addToCart } = useCart();
 
   const product = shoesData.find((shoe) => shoe.id === Number(productId));
 
@@ -39,14 +41,14 @@ const ProductDetailPage = () => {
       return;
     }
 
-    const cartItem = {
-      ...product,
+    addToCart({
+      product,
       selectedSize,
-      deliveryType,
+      selectedWidth: product.width,
       quantity: 1,
-    };
+    });
 
-    console.log("Add to cart:", cartItem);
+    window.alert(`${product.name} was added to your cart.`);
   };
 
   return (

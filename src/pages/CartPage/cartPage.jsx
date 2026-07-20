@@ -7,54 +7,13 @@ import { shoesData } from "../../data/shoesData";
 
 import "./CartPage.css";
 
-//Test Item in cart
-const initialCartItems = [
-  {
-    cartItemId: "cart-item-1",
-    productId: 1,
-    selectedSize: 6,
-    selectedWidth: "Medium",
-    quantity: 1,
-  },
-  {
-    cartItemId: "cart-item-2",
-    productId: 2,
-    selectedSize: 6,
-    selectedWidth: "Medium",
-    quantity: 1,
-  },
-];
-
 const CartPage = () => {
   const navigate = useNavigate();
 
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const { cartItems, removeFromCart, updateQuantity, totalQuantity, subtotal } =
+    useCart();
+
   const [deliveryType, setDeliveryType] = useState("standard");
-
-  const checkedCartItem = useMemo(() => {
-    return cartItems
-      .map((cartItem) => {
-        const product = shoesData.find(
-          (shoe) => shoe.id === cartItem.productId,
-        );
-
-        if (!product) {
-          return null;
-        }
-
-        return {
-          ...cartItem,
-          product,
-        };
-      })
-      .filter(Boolean);
-  }, [cartItems]);
-
-  const subtotal = useMemo(() => {
-    return checkedCartItem.reduce((total, cartItem) => {
-      return total + cartItem.product.price * cartItem.quantity;
-    }, 0);
-  }, [checkedCartItem]);
 
   const hasItems = checkedCartItem.length > 0;
 
@@ -92,9 +51,9 @@ const CartPage = () => {
         <section className="cart-page__background">
           <div className="cart-layout">
             <section className="cart-items-panel">
-              {checkedCartItem.length > 0 ? (
+              {cartItems.length > 0 ? (
                 <div className="cart-items-list">
-                  {checkedCartItem.map((cartItem) => {
+                  {cartItems.map((cartItem) => {
                     const { product } = cartItem;
 
                     const hasDiscount =
@@ -232,7 +191,7 @@ const CartPage = () => {
               <button
                 className="checkout-button"
                 type="button"
-                disabled={checkedCartItem.length === 0}
+                disabled={!hasItems}
                 onClick={handleCheckout}
               >
                 Go to Check Out
