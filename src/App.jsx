@@ -8,6 +8,7 @@ import SignUpPage from "./pages/account/signUpPage.jsx";
 import ForgotPasswordPage from "./pages/account/forgotPasswordPage.jsx";
 import ForgotEmailPage from "./pages/account/forgotEmailPage.jsx";
 import CartPage from "./pages/CartPage/cartPage.jsx";
+import CheckoutPage from "./pages/checkoutPage/checkoutPage.jsx";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/forgot-email" element={<ForgotEmailPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </BrowserRouter>
   );

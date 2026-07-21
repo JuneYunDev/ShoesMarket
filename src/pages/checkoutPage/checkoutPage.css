@@ -1,0 +1,114 @@
+.checkout-page {
+  min-height: 100vh;
+  background-color: #e8e6e6;
+  color: #111;
+}
+
+.checkout-page__main {
+  min-height: calc(100vh - 160px);
+}
+
+.checkout-page__heading {
+  padding: 30px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.checkout-page__heading h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+}
+
+.checkout-page__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+  gap: 48px;
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 64px 0 80px;
+  align-items: start;
+}
+
+.checkout-page__form-card,
+.checkout-page__summary-card {
+  background-color: #fff;
+}
+
+.checkout-page__form-card {
+  min-height: 900px;
+  padding: 38px 44px;
+}
+
+.checkout-page__summary-card {
+  min-height: 900px;
+  padding: 34px 36px;
+}
+
+.checkout-page__section-header {
+  margin-bottom: 36px;
+}
+
+.checkout-page__section-header h2,
+.checkout-page__summary-card h2 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.checkout-page__section-header p {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.checkout-page__placeholder h3 {
+  margin: 0 0 14px;
+  font-size: 1.5rem;
+}
+
+.checkout-page__placeholder p,
+.checkout-page__summary-placeholder p {
+  margin: 0;
+  color: #666;
+}
+
+.checkout-page__summary-placeholder {
+  margin-top: 32px;
+  padding: 32px 0;
+  border-top: 1px solid #ddd;
+}
+
+@media (max-width: 900px) {
+  .checkout-page__content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 36px;
+  }
+
+  .checkout-page__form-card,
+  .checkout-page__summary-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .checkout-page__heading {
+    padding: 24px 16px;
+  }
+
+  .checkout-page__content {
+    width: min(100% - 24px, 1120px);
+    padding-bottom: 48px;
+  }
+
+  .checkout-page__form-card,
+  .checkout-page__summary-card {
+    padding: 28px 22px;
+  }
+
+  .checkout-page__section-header h2,
+  .checkout-page__summary-card h2 {
+    font-size: 1.6rem;
+  }
+}

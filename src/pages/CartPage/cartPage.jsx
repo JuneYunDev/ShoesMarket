@@ -182,7 +182,7 @@ const CartPage = () => {
                 className="checkout-button"
                 type="button"
                 disabled={!hasItems}
-                onClick={handleCheckout}
+                onClick={() => navigate("/checkout")}
               >
                 Go to Check Out
               </button>
