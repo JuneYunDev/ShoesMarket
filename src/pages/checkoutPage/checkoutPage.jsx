@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../../components/layout/header";
 import Footer from "../../components/layout/footer";
 import { FaRegCreditCard, FaPaypal, FaGooglePay } from "react-icons/fa6";
+import { useCart } from "../../context/cartContext";
 import "./checkoutPage.css";
 
 const CheckoutPage = () => {
@@ -22,6 +23,8 @@ const CheckoutPage = () => {
     expiryYear: "",
     securityCode: "",
   });
+
+  const { cartItems, subtotal, totalQuantity } = useCart();
 
   const handleShippingChange = (event) => {
     const { name, value } = event.target;
