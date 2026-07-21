@@ -16,9 +16,11 @@ const CheckoutPage = () => {
   const handleShippingChange = (event) => {
     const { name, value } = event.target;
 
+    const nextValue = name === "postalCode" ? value.toUpperCase() : value;
+
     setShippingInfo((prevShippingInfo) => ({
       ...prevShippingInfo,
-      [name]: value,
+      [name]: nextValue,
     }));
   };
 
