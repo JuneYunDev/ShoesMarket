@@ -103,7 +103,7 @@ const CheckoutPage = () => {
                 </div>
 
                 <div className="checkout-page__form-row">
-                  <div className="checkout-page__field">
+                  <div className="checkout-page__field checkout-page__select-field">
                     <label htmlFor="province">Province</label>
 
                     <select
