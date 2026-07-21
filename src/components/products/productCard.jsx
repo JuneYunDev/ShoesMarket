@@ -1,94 +1,110 @@
+import { useState } from "react";
 import { Heart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/cartContext";
+
 import "./productCard.css";
 
-const ProductCard = ({ shoe, isFavorite, onToggleFavorite, onAddToCart }) => {
-  const { id, name, image, price, discount, rating, reviewCount } = shoe;
+const ProductCard = ({ shoe }) => {
+  const { addToCart } = useCart();
 
-  const stars = Array.from({ length: 5 }, (_, index) => {
-    const isActive = index < rating;
+  const [isSelectingSize, setIsSelectingSize] = useState(false);
 
-    return (
-      <Star
-        key={index}
-        size={13}
-        strokeWidth={2}
-        fill={isActive ? "currentColor" : "none"}
-        className={
-          isActive
-            ? "product-card__star product-card__star--active"
-            : "product-card__star"
-        }
-      />
-    );
-  });
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const handleOpenSizeSelection = () => {
+    setIsSelectingSize(true);
+  };
+
+  const handleCancel = () => {
+    setIsSelectingSize(false);
+    setSelectedSize(null);
+  };
+
+  const handleConfirmAddToCart = () => {
+    if (selectedSize === null) {
+      window.alert("Please select a size.");
+      return;
+    }
+
+    addToCart({
+      product: shoe,
+      selectedSize,
+      selectedWidth: "Medium",
+      quantity: 1,
+    });
+
+    setIsSelectingSize(false);
+    setSelectedSize(null);
+
+    window.alert(`${shoe.name} was added to your cart.`);
+  };
 
   return (
     <article className="product-card">
-      <div className="product-card__image-container">
-        <button
-          type="button"
-          className={
-            isFavorite
-              ? "product-card__favorite product-card__favorite--active"
-              : "product-card__favorite"
-          }
-          aria-label={
-            isFavorite
-              ? `Remove ${name} from favorites`
-              : `Add ${name} to favorites`
-          }
-          onClick={() => onToggleFavorite(id)}
-        >
-          <Heart size={21} fill={isFavorite ? "currentColor" : "none"} />
-        </button>
-
-        <Link
-          className="product-card__image-link"
-          to={`/products/${id}`}
-          aria-label={`View ${name}`}
-        >
-          <img className="product-card__image" src={image} alt={name} />
-        </Link>
-      </div>
-
-      <div className="product-card__content">
-        <Link className="product-card__name-link" to={`/products/${id}`}>
-          <h3 className="product-card__name">{name}</h3>
-        </Link>
-        <div className="product-card__price-row">
-          <span
-            className={
-              discount > 0
-                ? "product-card__price product-card__price--sale"
-                : "product-card__price"
-            }
-          >
-            ${price.toFixed(2)}
-          </span>
-
-          {discount > 0 && (
-            <span className="product-card__discount">({discount}% off)</span>
-          )}
+      <Link className="product-card__detail-link" to={`/products/${shoe.id}`}>
+        <div className="product-card__image-container">
+          <img
+            className="product-card__image"
+            src={shoe.image}
+            alt={shoe.name}
+          />
         </div>
 
-        <div
-          className="product-card__rating"
-          aria-label={`${rating} out of 5 stars`}
-        >
-          <div className="product-card__stars">{stars}</div>
+        <h2 className="product-card__name">{shoe.name}</h2>
+      </Link>
 
-          <span className="product-card__reviews">({reviewCount})</span>
-        </div>
+      <p className="product-card__price">${shoe.price.toFixed(2)}</p>
 
+      {!isSelectingSize ? (
         <button
+          className="product-card__add-button"
           type="button"
-          className="product-card__cart-button"
-          onClick={() => onAddToCart(shoe)}
+          onClick={handleOpenSizeSelection}
         >
           Add to Cart
         </button>
-      </div>
+      ) : (
+        <div className="product-card__size-selection">
+          <p>Select a Size</p>
+
+          <div className="product-card__sizes">
+            {shoe.sizes.map((size) => (
+              <button
+                className={
+                  selectedSize === size
+                    ? "product-card__size-button product-card__size-button--selected"
+                    : "product-card__size-button"
+                }
+                type="button"
+                key={size}
+                onClick={() => setSelectedSize(size)}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+
+          <div className="product-card__actions">
+            <button
+              className="product-card__confirm-button"
+              type="button"
+              onClick={handleConfirmAddToCart}
+              disabled={selectedSize === null}
+            >
+              Confirm
+            </button>
+
+            <button
+              className="product-card__cancel-button"
+              type="button"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </article>
   );
 };
