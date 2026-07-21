@@ -55,7 +55,7 @@ const Header = () => {
         </form>
 
         <div className="header-actions">
-          <Link to="signin">
+          <Link to="/signin" className="header__signin-button">
             <UserRound size={21} />
             <span>Sign in</span>
           </Link>
