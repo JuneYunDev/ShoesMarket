@@ -13,6 +13,15 @@ const CheckoutPage = () => {
     postalCode: "",
   });
 
+  const [paymentMethod, setPaymentMethod] = useState("card");
+
+  const [paymentInfo, setPaymentInfo] = useState({
+    cardNumber: "",
+    expiryMonth: "",
+    expiryYear: "",
+    securityCode: "",
+  });
+
   const handleShippingChange = (event) => {
     const { name, value } = event.target;
 
@@ -20,6 +29,25 @@ const CheckoutPage = () => {
 
     setShippingInfo((prevShippingInfo) => ({
       ...prevShippingInfo,
+      [name]: nextValue,
+    }));
+  };
+
+  const handlePaymentChange = (event) => {
+    const { name, value } = event.target;
+
+    let nextValue = value;
+
+    if (name === "cardNumber") {
+      nextValue = value.replace(/\D/g, "").slice(0, 16);
+    }
+
+    if (name === "securityCode") {
+      nextValue = value.replace(/\D/g, "").slice(0, 4);
+    }
+
+    setPaymentInfo((prevPaymentInfo) => ({
+      ...prevPaymentInfo,
       [name]: nextValue,
     }));
   };
@@ -143,6 +171,130 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               </form>
+            </section>
+            <section className="checkout-page__payment-section">
+              <h3>Payment</h3>
+
+              <div className="checkout-page__payment-options">
+                <label className="checkout-page__payment-option">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="card"
+                    checked={paymentMethod === "card"}
+                    onChange={(event) => setPaymentMethod(event.target.value)}
+                  />
+
+                  <span>Pay with Card</span>
+                </label>
+
+                {paymentMethod === "card" && (
+                  <div className="checkout-page__card-form">
+                    <div className="checkout-page__field">
+                      <label htmlFor="cardNumber">Card Number</label>
+
+                      <input
+                        id="cardNumber"
+                        name="cardNumber"
+                        type="text"
+                        inputMode="numeric"
+                        value={paymentInfo.cardNumber}
+                        onChange={handlePaymentChange}
+                        placeholder="Card Number"
+                        autoComplete="cc-number"
+                      />
+                    </div>
+
+                    <div className="checkout-page__payment-row">
+                      <div className="checkout-page__field checkout-page__select-field">
+                        <label htmlFor="expiryMonth">Month</label>
+
+                        <select
+                          id="expiryMonth"
+                          name="expiryMonth"
+                          value={paymentInfo.expiryMonth}
+                          onChange={handlePaymentChange}
+                          autoComplete="cc-exp-month"
+                        >
+                          <option value="">Month</option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                      </div>
+
+                      <div className="checkout-page__field checkout-page__select-field">
+                        <label htmlFor="expiryYear">Year</label>
+
+                        <select
+                          id="expiryYear"
+                          name="expiryYear"
+                          value={paymentInfo.expiryYear}
+                          onChange={handlePaymentChange}
+                          autoComplete="cc-exp-year"
+                        >
+                          <option value="">Year</option>
+                          <option value="2026">2026</option>
+                          <option value="2027">2027</option>
+                          <option value="2028">2028</option>
+                          <option value="2029">2029</option>
+                          <option value="2030">2030</option>
+                          <option value="2031">2031</option>
+                          <option value="2032">2032</option>
+                        </select>
+                      </div>
+
+                      <div className="checkout-page__field">
+                        <label htmlFor="securityCode">Security Code</label>
+
+                        <input
+                          id="securityCode"
+                          name="securityCode"
+                          type="password"
+                          inputMode="numeric"
+                          value={paymentInfo.securityCode}
+                          onChange={handlePaymentChange}
+                          placeholder="Security Code"
+                          autoComplete="cc-csc"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <label className="checkout-page__payment-option">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="paypal"
+                    checked={paymentMethod === "paypal"}
+                    onChange={(event) => setPaymentMethod(event.target.value)}
+                  />
+
+                  <span>PayPal</span>
+                </label>
+
+                <label className="checkout-page__payment-option">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="googlePay"
+                    checked={paymentMethod === "googlePay"}
+                    onChange={(event) => setPaymentMethod(event.target.value)}
+                  />
+
+                  <span>Google Pay</span>
+                </label>
+              </div>
             </section>
           </div>
 
