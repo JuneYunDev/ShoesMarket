@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../../components/layout/header";
 import Footer from "../../components/layout/footer";
+import { FaRegCreditCard, FaPaypal, FaGooglePay } from "react-icons/fa6";
 import "./checkoutPage.css";
 
 const CheckoutPage = () => {
@@ -50,6 +51,10 @@ const CheckoutPage = () => {
       ...prevPaymentInfo,
       [name]: nextValue,
     }));
+  };
+
+  const formatCardNumber = (cardNumber) => {
+    return cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
   };
 
   return (
@@ -186,6 +191,10 @@ const CheckoutPage = () => {
                   />
 
                   <span>Pay with Card</span>
+                  <FaRegCreditCard
+                    className="checkout-page__payment-icon checkout-page__payment-icon--card"
+                    aria-hidden="true"
+                  />
                 </label>
 
                 {paymentMethod === "card" && (
@@ -198,7 +207,7 @@ const CheckoutPage = () => {
                         name="cardNumber"
                         type="text"
                         inputMode="numeric"
-                        value={paymentInfo.cardNumber}
+                        value={formatCardNumber(paymentInfo.cardNumber)}
                         onChange={handlePaymentChange}
                         placeholder="Card Number"
                         autoComplete="cc-number"
@@ -281,6 +290,10 @@ const CheckoutPage = () => {
                   />
 
                   <span>PayPal</span>
+                  <FaPaypal
+                    className="checkout-page__payment-icon checkout-page__payment-icon--paypal"
+                    aria-hidden="true"
+                  />
                 </label>
 
                 <label className="checkout-page__payment-option">
@@ -293,6 +306,10 @@ const CheckoutPage = () => {
                   />
 
                   <span>Google Pay</span>
+                  <FaGooglePay
+                    className="checkout-page__payment-icon checkout-page__payment-icon--google-pay"
+                    aria-hidden="true"
+                  />
                 </label>
               </div>
             </section>

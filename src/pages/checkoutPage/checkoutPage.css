@@ -225,6 +225,26 @@
   cursor: pointer;
 }
 
+.checkout-page__payment-icon {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+}
+
+.checkout-page__payment-icon--card {
+  font-size: 1.5rem;
+  color: #111;
+}
+
+.checkout-page__payment-icon--paypal {
+  font-size: 1.55rem;
+  color: #003087;
+}
+
+.checkout-page__payment-icon--google-pay {
+  font-size: 3rem;
+  color: #111;
+}
+
 .checkout-page__card-form {
   display: flex;
   flex-direction: column;
