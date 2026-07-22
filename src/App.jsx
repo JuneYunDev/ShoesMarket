@@ -9,6 +9,7 @@ import ForgotPasswordPage from "./pages/account/forgotPasswordPage.jsx";
 import ForgotEmailPage from "./pages/account/forgotEmailPage.jsx";
 import CartPage from "./pages/CartPage/cartPage.jsx";
 import CheckoutPage from "./pages/checkoutPage/checkoutPage.jsx";
+import OrderCompletePage from "./pages/orderCompletePage/orderCompletePage.jsx";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/forgot-email" element={<ForgotEmailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-complete" element={<OrderCompletePage />} />
       </Routes>
     </BrowserRouter>
   );

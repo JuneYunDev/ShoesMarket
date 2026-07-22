@@ -3,6 +3,7 @@ import Header from "../../components/layout/header";
 import Footer from "../../components/layout/footer";
 import { FaRegCreditCard, FaPaypal, FaGooglePay } from "react-icons/fa6";
 import { useCart } from "../../context/cartContext";
+import { useNavigate } from "react-router-dom";
 import "./checkoutPage.css";
 
 const CheckoutPage = () => {
@@ -24,8 +25,10 @@ const CheckoutPage = () => {
     securityCode: "",
   });
 
+  const navigate = useNavigate();
+
   //Cart Context
-  const { cartItems, subtotal, totalQuantity } = useCart();
+  const { cartItems, subtotal, totalQuantity, clearCart } = useCart();
 
   //Validation
   const isShippingComplete =
@@ -84,6 +87,29 @@ const CheckoutPage = () => {
 
   const formatCardNumber = (cardNumber) => {
     return cardNumber.replace(/(\d{4})(?=\d)/g, "$1 ");
+  };
+
+  const handleConfirmPayment = () => {
+    if (!canConfirmPayment) {
+      return;
+    }
+
+    const order = {
+      orderNumber: `ORD-${Date.now()}`,
+      total,
+      totalQuantity,
+      items: cartItems,
+      shippingInfo,
+      paymentMethod,
+    };
+
+    clearCart();
+
+    navigate("/order-complete", {
+      state: {
+        order,
+      },
+    });
   };
 
   return (
@@ -402,6 +428,7 @@ const CheckoutPage = () => {
               type="button"
               className="checkout-page__confirm-button"
               disabled={!canConfirmPayment}
+              onClick={handleConfirmPayment}
             >
               Confirm to Payment
             </button>
