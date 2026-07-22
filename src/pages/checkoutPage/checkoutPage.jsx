@@ -24,7 +24,28 @@ const CheckoutPage = () => {
     securityCode: "",
   });
 
+  //Cart Context
   const { cartItems, subtotal, totalQuantity } = useCart();
+
+  //Validation
+  const isShippingComplete =
+    shippingInfo.firstName.trim() !== "" &&
+    shippingInfo.lastName.trim() !== "" &&
+    shippingInfo.address.trim() !== "" &&
+    shippingInfo.city.trim() !== "" &&
+    shippingInfo.province.trim() !== "" &&
+    shippingInfo.postalCode.trim() !== "";
+
+  const isCardComplete =
+    paymentInfo.cardNumber.replace(/\s/g, "").length >= 16 &&
+    paymentInfo.expiryMonth !== "" &&
+    paymentInfo.expiryYear !== "" &&
+    paymentInfo.securityCode.length >= 3;
+
+  const isPaymentComplete = paymentMethod === "card" ? isCardComplete : true;
+
+  const canConfirmPayment =
+    cartItems.length > 0 && isShippingComplete && isPaymentComplete;
 
   const deliveryFee = subtotal > 0 ? 7.99 : 0;
   const taxRate = 0.13;
@@ -377,6 +398,13 @@ const CheckoutPage = () => {
                 <span>${total.toFixed(2)}</span>
               </div>
             </div>
+            <button
+              type="button"
+              className="checkout-page__confirm-button"
+              disabled={!canConfirmPayment}
+            >
+              Confirm to Payment
+            </button>
           </aside>
         </section>
       </main>
