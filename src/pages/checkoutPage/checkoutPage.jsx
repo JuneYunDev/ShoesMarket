@@ -26,6 +26,11 @@ const CheckoutPage = () => {
 
   const { cartItems, subtotal, totalQuantity } = useCart();
 
+  const deliveryFee = subtotal > 0 ? 7.99 : 0;
+  const taxRate = 0.13;
+  const taxes = subtotal * taxRate;
+  const total = subtotal + taxes + deliveryFee;
+
   const handleShippingChange = (event) => {
     const { name, value } = event.target;
 
@@ -73,7 +78,9 @@ const CheckoutPage = () => {
           <div className="checkout-page__form-card">
             <div className="checkout-page__section-header">
               <h2>Shipping Information</h2>
-              <p>2 items</p>
+              <p>
+                {totalQuantity} {totalQuantity === 1 ? "item" : "items"}
+              </p>
             </div>
 
             <section className="checkout-page__shipping-section">
@@ -321,8 +328,54 @@ const CheckoutPage = () => {
           <aside className="checkout-page__summary-card">
             <h2>Order Summary</h2>
 
-            <div className="checkout-page__summary-placeholder">
-              <p>Your selected products will appear here.</p>
+            <div className="checkout-page__summary-products">
+              {cartItems.map((cartItem) => (
+                <div
+                  key={cartItem.cartItemId}
+                  className="checkout-page__summary-item"
+                >
+                  <img
+                    src={cartItem.product.image}
+                    alt={cartItem.product.name}
+                    className="checkout-page__summary-image"
+                  />
+
+                  <div className="checkout-page__summary-info">
+                    <h4>{cartItem.product.name}</h4>
+
+                    <p className="checkout-page__summary-price">
+                      ${cartItem.product.price.toFixed(2)}
+                    </p>
+
+                    <p>Size : {cartItem.selectedSize}</p>
+
+                    <p>Quantity : {cartItem.quantity}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="checkout-page__summary-total">
+              <div className="checkout-page__summary-row">
+                <span>Subtotal</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+
+              <div className="checkout-page__summary-row">
+                <span>Taxes</span>
+                <span>${taxes.toFixed(2)}</span>
+              </div>
+
+              <div className="checkout-page__summary-row">
+                <span>Delivery Fee</span>
+                <span>${deliveryFee.toFixed(2)}</span>
+              </div>
+
+              <hr />
+
+              <div className="checkout-page__summary-row checkout-page__summary-row--total">
+                <span>Total</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
             </div>
           </aside>
         </section>
