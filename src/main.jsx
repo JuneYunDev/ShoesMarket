@@ -4,13 +4,16 @@ import App from "./App";
 import { CartProvider } from "./context/cartContext";
 import { AccountProvider } from "./context/accountContext";
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AccountProvider>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </AccountProvider>
+    <BrowserRouter>
+      <AccountProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </AccountProvider>
+    </BrowserRouter>
   </StrictMode>,
 );

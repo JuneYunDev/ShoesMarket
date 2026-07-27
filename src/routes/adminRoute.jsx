@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import { useAccount } from "../context/AccountContext";
+import { useAccount } from "../context/accountContext";
 
 const AdminRoute = () => {
   const { isLoggedIn, isAdmin } = useAccount();

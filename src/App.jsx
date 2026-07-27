@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/homePage.jsx";
 import ProductListPage from "./pages/productListPage/productListPage.jsx";
@@ -15,23 +15,21 @@ import ProductManagementPage from "./pages/admin/productManagement.jsx";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductListPage />} />
-        <Route path="/products/:productId" element={<ProductDetailPage />} />
-        <Route path="/signin" element={<LoginPage />} />
-        <Route element={<AdminRoute />}>
-          <Route path="/admin/products" element={<ProductManagementPage />} />
-        </Route>
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/forgot-email" element={<ForgotEmailPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/order-complete" element={<OrderCompletePage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/products" element={<ProductListPage />} />
+      <Route path="/products/:productId" element={<ProductDetailPage />} />
+      <Route path="/signin" element={<LoginPage />} />
+      <Route element={<AdminRoute />}>
+        <Route path="/admin/products" element={<ProductManagementPage />} />
+      </Route>
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/forgot-email" element={<ForgotEmailPage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/order-complete" element={<OrderCompletePage />} />
+    </Routes>
   );
 };
 
