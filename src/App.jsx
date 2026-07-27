@@ -10,6 +10,8 @@ import ForgotEmailPage from "./pages/account/forgotEmailPage.jsx";
 import CartPage from "./pages/CartPage/cartPage.jsx";
 import CheckoutPage from "./pages/checkoutPage/checkoutPage.jsx";
 import OrderCompletePage from "./pages/orderCompletePage/orderCompletePage.jsx";
+import AdminRoute from "./routes/adminRoute.jsx";
+import ProductManagementPage from "./pages/admin/productManagement.jsx";
 
 const App = () => {
   return (
@@ -19,6 +21,9 @@ const App = () => {
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/products/:productId" element={<ProductDetailPage />} />
         <Route path="/signin" element={<LoginPage />} />
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/products" element={<ProductManagementPage />} />
+        </Route>
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/forgot-email" element={<ForgotEmailPage />} />
