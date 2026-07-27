@@ -1,7 +1,19 @@
-import { useState } from "react";
-import { ChevronUp, Search, SlidersHorizontal } from "lucide-react";
+import { useMemo, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  ChevronDown,
+  ChevronUp,
+  LogOut,
+  Search,
+  ShoppingCart,
+  SlidersHorizontal,
+  UserRound,
+} from "lucide-react";
+
 import ProductCard from "../../components/admin/ProductCard";
+import { useAccount } from "../../context/accountContext";
 import { shoesData } from "../../data/shoesData";
+
 import "./productManagement.css";
 
 const sectionOptions = ["Women", "Men", "Kids", "Brand", "Trend", "Deals"];
@@ -21,13 +33,78 @@ const sortOptions = [
 
 const widthOptions = ["Medium", "Wide", "Extra Wide"];
 
+const PRODUCTS_PER_PAGE = 6;
+
 const ProductManagement = () => {
+  const navigate = useNavigate();
+  const { currentAccount, logout } = useAccount();
+
   const [products, setProducts] = useState(shoesData);
+
+  const [filtersOpen, setFiltersOpen] = useState(true);
   const [selectedSection, setSelectedSection] = useState("Women");
   const [selectedSize, setSelectedSize] = useState(5.5);
   const [selectedSort, setSelectedSort] = useState("Featured");
   const [selectedWidth, setSelectedWidth] = useState("Medium");
   const [brandSearch, setBrandSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const filteredProducts = useMemo(() => {
+    let result = [...products];
+
+    if (brandSearch.trim()) {
+      const searchValue = brandSearch.trim().toLowerCase();
+
+      result = result.filter((product) => {
+        const brand = product.brand?.toLowerCase() ?? "";
+        const name = product.name?.toLowerCase() ?? "";
+
+        return brand.includes(searchValue) || name.includes(searchValue);
+      });
+    }
+
+    if (selectedSort === "Newest") {
+      result.sort((firstProduct, secondProduct) => {
+        return Number(secondProduct.id) - Number(firstProduct.id);
+      });
+    }
+
+    if (selectedSort === "Top Rated") {
+      result.sort((firstProduct, secondProduct) => {
+        return (secondProduct.rating ?? 0) - (firstProduct.rating ?? 0);
+      });
+    }
+
+    if (selectedSort === "Price Low to High") {
+      result.sort((firstProduct, secondProduct) => {
+        return firstProduct.price - secondProduct.price;
+      });
+    }
+
+    if (selectedSort === "Price High to Low") {
+      result.sort((firstProduct, secondProduct) => {
+        return secondProduct.price - firstProduct.price;
+      });
+    }
+
+    return result;
+  }, [products, brandSearch, selectedSort]);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE),
+  );
+
+  const paginatedProducts = useMemo(() => {
+    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+
+    return filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+  }, [filteredProducts, currentPage]);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/signin", { replace: true });
+  };
 
   const handleEditProduct = (shoe) => {
     console.log("Edit product:", shoe);
@@ -51,164 +128,280 @@ const ProductManagement = () => {
     console.log("Open Add Product form");
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleSectionChange = (section) => {
+    setSelectedSection(section);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (sortOption) => {
+    setSelectedSort(sortOption);
+    setCurrentPage(1);
+  };
+
   return (
-    <main className="product-management">
-      <h1 className="product-management__title">Product Management</h1>
-
-      <section className="product-filters">
-        <div className="product-filters__heading">
-          <div>
-            <SlidersHorizontal size={30} />
-            <h2>Filters</h2>
-          </div>
-
-          <button type="button" aria-label="Collapse filters">
-            <ChevronUp size={32} />
-          </button>
-        </div>
-
-        <div className="filter-row">
-          <h3>Section</h3>
-
-          <div className="filter-row__options">
-            {sectionOptions.map((section) => (
-              <label key={section}>
-                <input
-                  type="radio"
-                  name="section"
-                  value={section}
-                  checked={selectedSection === section}
-                  onChange={(event) => setSelectedSection(event.target.value)}
-                />
-
-                <span>{section}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="filter-row">
-          <h3>Size</h3>
-
-          <div className="size-options">
-            {sizeOptions.map((size) => (
-              <button
-                key={size}
-                className={
-                  selectedSize === size
-                    ? "size-option size-option--active"
-                    : "size-option"
-                }
-                type="button"
-                onClick={() => setSelectedSize(size)}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="filter-row">
-          <h3>Sort</h3>
-
-          <div className="filter-row__options">
-            {sortOptions.map((sortOption) => (
-              <label key={sortOption}>
-                <input
-                  type="radio"
-                  name="sort"
-                  value={sortOption}
-                  checked={selectedSort === sortOption}
-                  onChange={(event) => setSelectedSort(event.target.value)}
-                />
-
-                <span>{sortOption}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="filter-row">
-          <h3>Width</h3>
-
-          <div className="filter-row__options">
-            {widthOptions.map((width) => (
-              <label key={width}>
-                <input
-                  type="radio"
-                  name="width"
-                  value={width}
-                  checked={selectedWidth === width}
-                  onChange={(event) => setSelectedWidth(event.target.value)}
-                />
-
-                <span>{width}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className="filter-row">
-          <h3>Brand</h3>
-
-          <div className="brand-search">
-            <Search size={18} />
-
-            <input
-              type="search"
-              placeholder="Search..."
-              value={brandSearch}
-              onChange={(event) => setBrandSearch(event.target.value)}
-            />
-          </div>
-        </div>
-      </section>
-
-      <button
-        className="add-product-button"
-        type="button"
-        onClick={handleAddProduct}
-      >
-        + Add Product
-      </button>
-
-      <section className="products-grid">
-        {products.map((shoe) => (
-          <ProductCard
-            key={shoe.id}
-            shoe={shoe}
-            onEdit={handleEditProduct}
-            onDelete={handleDeleteProduct}
-          />
-        ))}
-      </section>
-
-      {products.length === 0 && (
-        <p className="products-empty-message">
-          No products are currently available.
-        </p>
-      )}
-
-      <nav className="pagination" aria-label="Product pagination">
-        <button type="button" aria-label="Previous page">
-          &lt;
-        </button>
-
-        {[1, 2, 3, 4, 5].map((page) => (
+    <div className="admin-page">
+      <header className="admin-header">
+        <div className="admin-header__top">
           <button
-            key={page}
-            className={page === 1 ? "pagination__active" : ""}
+            className="admin-header__brand"
             type="button"
+            onClick={() => navigate("/admin/products")}
           >
-            {page}
+            Shoes Market Admin Dashboard
           </button>
-        ))}
 
-        <button type="button" aria-label="Next page">
-          &gt;
+          <div className="admin-header__actions">
+            <div className="admin-header__account">
+              <UserRound size={22} aria-hidden="true" />
+
+              <span>{currentAccount?.name ?? "Store Admin"}</span>
+            </div>
+
+            <button
+              className="admin-header__sign-out"
+              type="button"
+              onClick={handleLogout}
+            >
+              <LogOut size={18} aria-hidden="true" />
+              <span>Sign Out</span>
+            </button>
+
+            <button
+              className="admin-header__cart"
+              type="button"
+              onClick={() => navigate("/cart")}
+            >
+              <ShoppingCart size={22} aria-hidden="true" />
+              <span>Cart</span>
+            </button>
+          </div>
+        </div>
+
+        <nav className="admin-navigation" aria-label="Admin navigation">
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "admin-navigation__link admin-navigation__link--active"
+                : "admin-navigation__link"
+            }
+            to="/admin/products"
+          >
+            Product Management
+          </NavLink>
+
+          <NavLink className="admin-navigation__link" to="/admin/customers">
+            Customer Management
+          </NavLink>
+
+          <NavLink className="admin-navigation__link" to="/admin/orders">
+            Order Management
+          </NavLink>
+
+          <NavLink className="admin-navigation__link" to="/admin/profile">
+            Profile
+          </NavLink>
+        </nav>
+      </header>
+
+      <main className="product-management">
+        <h1 className="product-management__title">Product Management</h1>
+
+        <section className="product-filters">
+          <div className="product-filters__heading">
+            <div className="product-filters__heading-title">
+              <SlidersHorizontal size={28} aria-hidden="true" />
+              <h2>Filters</h2>
+            </div>
+
+            <button
+              className="product-filters__toggle"
+              type="button"
+              aria-label={filtersOpen ? "Collapse filters" : "Expand filters"}
+              aria-expanded={filtersOpen}
+              onClick={() => setFiltersOpen((currentValue) => !currentValue)}
+            >
+              {filtersOpen ? (
+                <ChevronUp size={30} />
+              ) : (
+                <ChevronDown size={30} />
+              )}
+            </button>
+          </div>
+
+          {filtersOpen && (
+            <div className="product-filters__content">
+              <div className="filter-row">
+                <h3>Section</h3>
+
+                <div className="filter-row__options">
+                  {sectionOptions.map((section) => (
+                    <label className="filter-radio" key={section}>
+                      <input
+                        type="radio"
+                        name="section"
+                        value={section}
+                        checked={selectedSection === section}
+                        onChange={() => handleSectionChange(section)}
+                      />
+
+                      <span>{section}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-row">
+                <h3>Size</h3>
+
+                <div className="size-options">
+                  {sizeOptions.map((size) => (
+                    <button
+                      key={size}
+                      className={
+                        selectedSize === size
+                          ? "size-option size-option--active"
+                          : "size-option"
+                      }
+                      type="button"
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-row">
+                <h3>Sort</h3>
+
+                <div className="filter-row__options">
+                  {sortOptions.map((sortOption) => (
+                    <label className="filter-radio" key={sortOption}>
+                      <input
+                        type="radio"
+                        name="sort"
+                        value={sortOption}
+                        checked={selectedSort === sortOption}
+                        onChange={() => handleSortChange(sortOption)}
+                      />
+
+                      <span>{sortOption}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-row">
+                <h3>Width</h3>
+
+                <div className="filter-row__options">
+                  {widthOptions.map((width) => (
+                    <label className="filter-radio" key={width}>
+                      <input
+                        type="radio"
+                        name="width"
+                        value={width}
+                        checked={selectedWidth === width}
+                        onChange={() => setSelectedWidth(width)}
+                      />
+
+                      <span>{width}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-row">
+                <h3>Brand</h3>
+
+                <label className="brand-search">
+                  <Search size={19} aria-hidden="true" />
+
+                  <input
+                    type="search"
+                    placeholder="Search..."
+                    value={brandSearch}
+                    onChange={(event) => {
+                      setBrandSearch(event.target.value);
+                      setCurrentPage(1);
+                    }}
+                  />
+                </label>
+              </div>
+            </div>
+          )}
+        </section>
+
+        <button
+          className="add-product-button"
+          type="button"
+          onClick={handleAddProduct}
+        >
+          + Add Product
         </button>
-      </nav>
-    </main>
+
+        {paginatedProducts.length > 0 ? (
+          <section className="products-grid" aria-label="Products">
+            {paginatedProducts.map((shoe) => (
+              <ProductCard
+                key={shoe.id}
+                shoe={shoe}
+                onEdit={handleEditProduct}
+                onDelete={handleDeleteProduct}
+              />
+            ))}
+          </section>
+        ) : (
+          <p className="products-empty-message">
+            No products match the selected filters.
+          </p>
+        )}
+
+        {filteredProducts.length > 0 && (
+          <nav className="pagination" aria-label="Product pagination">
+            <button
+              type="button"
+              aria-label="Previous page"
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              &lt;
+            </button>
+
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (page) => (
+                <button
+                  key={page}
+                  className={currentPage === page ? "pagination__active" : ""}
+                  type="button"
+                  aria-current={currentPage === page ? "page" : undefined}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ),
+            )}
+
+            <button
+              type="button"
+              aria-label="Next page"
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              &gt;
+            </button>
+          </nav>
+        )}
+      </main>
+    </div>
   );
 };
 
