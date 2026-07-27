@@ -1,17 +1,23 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Header from "../../components/layout/header";
+import { useAccount } from "../../context/accountContext";
 import "./account.css";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const { login } = useAccount();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,12 +26,31 @@ const LoginPage = () => {
       ...currentData,
       [name]: value,
     }));
+
+    if (errorMessage) {
+      setErrorMessage("");
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Login data:", formData);
+    const result = login({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (!result.success) {
+      setErrorMessage(result.message);
+      return;
+    }
+
+    if (result.account.role === "admin") {
+      navigate("/admin/products");
+      return;
+    }
+
+    navigate("/");
   };
 
   return (
@@ -87,6 +112,12 @@ const LoginPage = () => {
                   {showPassword ? <EyeOff size={28} /> : <Eye size={28} />}
                 </button>
               </div>
+
+              {errorMessage && (
+                <p className="account-form__error" role="alert">
+                  {errorMessage}
+                </p>
+              )}
 
               <div className="account-form__links">
                 <Link to="/forgot-password">Forgot Password?</Link>

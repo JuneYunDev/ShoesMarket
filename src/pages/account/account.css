@@ -228,6 +228,16 @@
   margin-top: 2px;
 }
 
+/* Log-in error message style */
+.account-form__error {
+  margin: -4px 0 4px;
+
+  color: #b42318;
+
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 /* Tablet */
 
 @media (max-width: 900px) {
