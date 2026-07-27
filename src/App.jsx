@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/checkoutPage/checkoutPage.jsx";
 import OrderCompletePage from "./pages/orderCompletePage/orderCompletePage.jsx";
 import AdminRoute from "./routes/adminRoute.jsx";
 import ProductManagementPage from "./pages/admin/productManagement.jsx";
+import AddProductPage from "./pages/admin/addProductPage.jsx";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/signin" element={<LoginPage />} />
       <Route element={<AdminRoute />}>
         <Route path="/admin/products" element={<ProductManagementPage />} />
+        <Route path="/admin/products/add" element={<AddProductPage />} />
       </Route>
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />

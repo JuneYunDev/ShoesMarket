@@ -1,0 +1,379 @@
+.add-product-page {
+  min-height: 100vh;
+  background: #e7e5e5;
+  color: #111;
+}
+
+.add-product-page__heading {
+  padding: 38px 24px 44px;
+  border-bottom: 1px solid #d4d4d4;
+  background: #fff;
+}
+
+.add-product-page__heading h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.add-product-page__content {
+  width: min(100% - 48px, 1240px);
+  margin: 0 auto;
+  padding: 52px 0 76px;
+}
+
+.product-form {
+  padding: 34px 38px 42px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.product-form__title {
+  margin: 0 0 28px;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+}
+
+.product-form__row {
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.product-form__row > label,
+.product-form__row > legend {
+  padding-top: 10px;
+  font-size: 1.18rem;
+  font-weight: 700;
+}
+
+.product-form__row label span,
+.product-form__row legend span {
+  margin-left: 4px;
+  color: #c00000;
+}
+
+.product-form__row--sizes {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.product-form__row--sizes legend {
+  float: left;
+  width: 145px;
+}
+
+.product-form__row--sizes .product-form__field {
+  grid-column: 2;
+}
+
+.product-form__field {
+  min-width: 0;
+}
+
+.product-form__field > input,
+.product-form__field > select,
+.product-form__field > textarea,
+.product-form__price input {
+  width: min(100%, 600px);
+  box-sizing: border-box;
+  border: 1px solid #111;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font: inherit;
+}
+
+.product-form__field > input,
+.product-form__field > select,
+.product-form__price input {
+  min-height: 44px;
+  padding: 8px 14px;
+}
+
+.product-form__field > select {
+  width: min(100%, 285px);
+  cursor: pointer;
+}
+
+.product-form__field > textarea {
+  min-height: 128px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.product-form__field input:focus,
+.product-form__field select:focus,
+.product-form__field textarea:focus {
+  outline: 3px solid #c8c8c8;
+  outline-offset: 2px;
+}
+
+.product-form__price {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.product-form__price input {
+  flex: 1;
+}
+
+.product-form__price strong {
+  flex-shrink: 0;
+  font-size: 1.05rem;
+}
+
+/* Image */
+
+.product-image-control {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.product-image-control__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.product-image-control__display {
+  width: min(100%, 600px);
+  min-height: 44px;
+}
+
+.product-image-placeholder {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 8px 14px;
+  border: 1px solid #111;
+  border-radius: 6px;
+  color: #777;
+}
+
+.product-image-preview {
+  position: relative;
+  width: 180px;
+  height: 140px;
+  overflow: hidden;
+  border: 1px solid #c7c7c7;
+  border-radius: 7px;
+}
+
+.product-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-image-preview button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 0;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+.product-image-control__upload {
+  min-width: 185px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 6px;
+  background: #696c70;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.product-image-control__upload:hover {
+  background: #4e5053;
+}
+
+/* Sizes */
+
+.product-form__sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-form__size {
+  min-width: 48px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border: 1px solid #111;
+  border-radius: 7px;
+  background: #fff;
+  color: #111;
+  font: inherit;
+  cursor: pointer;
+}
+
+.product-form__size:hover {
+  background: #efefef;
+}
+
+.product-form__size--selected {
+  background: #050505;
+  color: #fff;
+}
+
+/* Messages */
+
+.product-form__error {
+  margin: 6px 0 0;
+  color: #b42318;
+  font-size: 0.88rem;
+}
+
+.product-form__helper {
+  margin: 6px 0 0;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.product-form__character-count {
+  width: min(100%, 600px);
+  margin: 5px 0 0;
+  color: #666;
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+.product-form__submit-error {
+  margin: 18px 0;
+  padding: 12px 14px;
+  border: 1px solid #b42318;
+  border-radius: 5px;
+  background: #fff1f0;
+  color: #b42318;
+}
+
+/* Buttons */
+
+.product-form__actions {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.28fr) 1fr;
+  gap: 14px;
+  margin-top: 42px;
+}
+
+.product-form__actions button {
+  min-height: 58px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.product-form__cancel {
+  border: 1px solid #111;
+  background: #fff;
+  color: #111;
+}
+
+.product-form__cancel:hover {
+  background: #eee;
+}
+
+.product-form__submit {
+  border: 1px solid #050505;
+  background: #050505;
+  color: #fff;
+}
+
+.product-form__submit:hover:not(:disabled) {
+  background: #292929;
+}
+
+.product-form__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.product-form button:focus-visible {
+  outline: 3px solid #777;
+  outline-offset: 3px;
+}
+
+/* Responsive */
+
+@media (max-width: 760px) {
+  .add-product-page__content {
+    width: min(100% - 24px, 1240px);
+    padding: 30px 0 52px;
+  }
+
+  .product-form {
+    padding: 25px 20px 30px;
+  }
+
+  .product-form__row {
+    display: block;
+    margin-bottom: 22px;
+  }
+
+  .product-form__row > label,
+  .product-form__row > legend {
+    display: block;
+    width: auto;
+    margin-bottom: 8px;
+    padding-top: 0;
+  }
+
+  .product-form__row--sizes legend {
+    float: none;
+  }
+
+  .product-form__row--sizes .product-form__field {
+    grid-column: auto;
+  }
+
+  .product-image-control {
+    flex-direction: column;
+  }
+
+  .product-image-control__display,
+  .product-image-control__upload,
+  .product-form__field > input,
+  .product-form__field > select,
+  .product-form__field > textarea,
+  .product-form__price input {
+    width: 100%;
+  }
+
+  .product-image-control__upload {
+    min-width: 0;
+  }
+
+  .product-form__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .product-form__cancel {
+    order: 2;
+  }
+}

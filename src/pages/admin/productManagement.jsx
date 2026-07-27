@@ -13,6 +13,7 @@ import {
 import ProductCard from "../../components/admin/ProductCard";
 import { useAccount } from "../../context/accountContext";
 import { shoesData } from "../../data/shoesData";
+import { useProducts } from "../../context/productContext";
 
 import "./productManagement.css";
 
@@ -39,7 +40,7 @@ const ProductManagement = () => {
   const navigate = useNavigate();
   const { currentAccount, logout } = useAccount();
 
-  const [products, setProducts] = useState(shoesData);
+  const { products, deleteProduct } = useProducts();
 
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [selectedSection, setSelectedSection] = useState("Women");
@@ -119,13 +120,11 @@ const ProductManagement = () => {
       return;
     }
 
-    setProducts((currentProducts) =>
-      currentProducts.filter((product) => product.id !== productId),
-    );
+    deleteProduct(productId);
   };
 
   const handleAddProduct = () => {
-    console.log("Open Add Product form");
+    navigate("/admin/products/add");
   };
 
   const handlePageChange = (page) => {
