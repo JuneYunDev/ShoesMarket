@@ -13,6 +13,7 @@ import OrderCompletePage from "./pages/orderCompletePage/orderCompletePage.jsx";
 import AdminRoute from "./routes/adminRoute.jsx";
 import ProductManagementPage from "./pages/admin/productManagement.jsx";
 import AddProductPage from "./pages/admin/addProductPage.jsx";
+import EditProductPage from "./pages/admin/editProductPage.jsx";
 
 const App = () => {
   return (
@@ -24,6 +25,10 @@ const App = () => {
       <Route element={<AdminRoute />}>
         <Route path="/admin/products" element={<ProductManagementPage />} />
         <Route path="/admin/products/add" element={<AddProductPage />} />
+        <Route
+          path="/admin/products/:productId/edit"
+          element={<EditProductPage />}
+        />
       </Route>
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />

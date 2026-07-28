@@ -108,7 +108,7 @@ const ProductManagement = () => {
   };
 
   const handleEditProduct = (shoe) => {
-    console.log("Edit product:", shoe);
+    navigate(`/admin/products/${shoe.id}/edit`);
   };
 
   const handleDeleteProduct = (productId) => {
