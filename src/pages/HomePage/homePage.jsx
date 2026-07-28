@@ -3,6 +3,7 @@ import Footer from "../../components/layout/footer.jsx";
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useProducts } from "../../context/productContext.jsx";
 
 import "./homePage.css";
 
