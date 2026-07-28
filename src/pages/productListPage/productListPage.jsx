@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import ProductCard from "../../components/products/ProductCard";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
-import { shoesData } from "../../data/shoesData";
+import { useProducts } from "../../context/productContext";
 
 import "./ProductListPage.css";
 
@@ -34,7 +34,7 @@ const sortOptions = [
 const widthOptions = ["Medium", "Wide", "Extra Wide"];
 
 const ProductListPage = () => {
-  const [products] = useState(shoesData);
+  const { products } = useProducts();
   const [selectedSize, setSelectedSize] = useState(5.5);
   const [selectedSort, setSelectedSort] = useState("Featured");
   const [selectedWidth, setSelectedWidth] = useState("Medium");
@@ -217,7 +217,6 @@ const ProductListPage = () => {
               shoe={shoe}
               isFavorite={favorites.includes(shoe.id)}
               onToggleFavorite={handleToggleFavorite}
-              onAddToCart={handleAddToCart}
             />
           ))}
         </section>
