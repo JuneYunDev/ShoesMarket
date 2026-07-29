@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 
 import HomePage from "./pages/HomePage/homePage.jsx";
 import ProductListPage from "./pages/productListPage/productListPage.jsx";
@@ -14,8 +15,14 @@ import AdminRoute from "./routes/adminRoute.jsx";
 import ProductManagementPage from "./pages/admin/productManagement.jsx";
 import AddProductPage from "./pages/admin/addProductPage.jsx";
 import EditProductPage from "./pages/admin/editProductPage.jsx";
+import { supabase } from "./lib/supabase.js";
+import { testSupabaseConnection } from "./services/testSupabaseConnection";
 
 const App = () => {
+  useEffect(() => {
+    testSupabaseConnection();
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
