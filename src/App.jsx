@@ -17,6 +17,7 @@ import AddProductPage from "./pages/admin/addProductPage.jsx";
 import EditProductPage from "./pages/admin/editProductPage.jsx";
 import { supabase } from "./lib/supabase.js";
 import { testSupabaseConnection } from "./services/testSupabaseConnection";
+import CustomerManagementPage from "./pages/admin/customerManagementPage";
 
 const App = () => {
   useEffect(() => {
@@ -36,6 +37,7 @@ const App = () => {
           path="/admin/products/:productId/edit"
           element={<EditProductPage />}
         />
+        <Route path="/admin/customers" element={<CustomerManagementPage />} />
       </Route>
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
