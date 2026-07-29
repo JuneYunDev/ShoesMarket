@@ -1,16 +1,5 @@
-# React + Vite
+# Shoes Online Market
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Database UML Diagram (by Lucidchart)
+<img width="1294" height="583" alt="스크린샷 2026-07-28 223855" src="https://github.com/user-attachments/assets/1d1cb4a9-25d4-41a0-aabc-529d5ab8b35f" />
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
