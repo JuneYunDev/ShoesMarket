@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
+
+import AdminHeader from "../../components/admin/AdminHeader";
 import { getCustomers } from "../../services/customerService";
 
-import "./managementTable.css";
+import "./customerManagement.css";
+
+const EMPTY_ROW_COUNT = 8;
 
 const formatDate = (dateValue) => {
   if (!dateValue) {
     return "No orders";
   }
 
-  return new Intl.DateTimeFormat("en-CA", {
+  return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
+    month: "numeric",
+    day: "numeric",
   }).format(new Date(dateValue));
 };
 
@@ -43,7 +47,9 @@ const CustomerManagementPage = () => {
       } catch (error) {
         console.error("Failed to load customers:", error);
 
-        setErrorMessage("Customer information could not be loaded.");
+        setErrorMessage(
+          "Customer information could not be loaded. Please try again.",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -53,70 +59,102 @@ const CustomerManagementPage = () => {
   }, []);
 
   return (
-    <main className="management-page">
-      <header className="management-page__heading">
-        <h1>Customer Management</h1>
-      </header>
+    <div className="admin-page">
+      <AdminHeader />
 
-      <section className="management-page__background">
-        <div className="management-table-card">
-          {isLoading && (
-            <p className="management-table__message">Loading customers...</p>
-          )}
+      <main className="customer-management">
+        <header className="customer-management__heading">
+          <h1>Customer Management</h1>
+        </header>
 
-          {!isLoading && errorMessage && (
-            <p
-              className="management-table__message management-table__message--error"
-              role="alert"
-            >
-              {errorMessage}
-            </p>
-          )}
+        <section className="customer-management__background">
+          <div className="customer-table-card">
+            {isLoading && (
+              <p className="customer-table__message">Loading customers...</p>
+            )}
 
-          {!isLoading && !errorMessage && customers.length === 0 && (
-            <p className="management-table__message">
-              No customers were found.
-            </p>
-          )}
+            {!isLoading && errorMessage && (
+              <p
+                className="customer-table__message customer-table__message--error"
+                role="alert"
+              >
+                {errorMessage}
+              </p>
+            )}
 
-          {!isLoading && !errorMessage && customers.length > 0 && (
-            <div className="management-table-wrapper">
-              <table className="management-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>E-mail</th>
-                    <th>Address</th>
-                    <th>Last Order</th>
-                    <th>Total Orders</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {customers.map((customer) => (
-                    <tr key={customer.id}>
-                      <td>{customer.fullName}</td>
-
-                      <td>
-                        <a href={`mailto:${customer.email}`}>
-                          {customer.email}
-                        </a>
-                      </td>
-
-                      <td>{formatAddress(customer) || "No address"}</td>
-
-                      <td>{formatDate(customer.lastOrderDate)}</td>
-
-                      <td>{customer.totalOrders}</td>
+            {!isLoading && !errorMessage && (
+              <div className="customer-table-wrapper">
+                <table className="customer-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>E-mail</th>
+                      <th>Address</th>
+                      <th>
+                        <span>Last</span>
+                        <span>Order</span>
+                      </th>
+                      <th>
+                        <span>Total</span>
+                        <span>Orders</span>
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </section>
-    </main>
+                  </thead>
+
+                  <tbody>
+                    {customers.map((customer) => (
+                      <tr key={customer.id}>
+                        <td>
+                          {customer.fullName ??
+                            `${customer.first_name} ${customer.last_name}`}
+                        </td>
+
+                        <td>
+                          <a href={`mailto:${customer.email}`}>
+                            {customer.email}
+                          </a>
+                        </td>
+
+                        <td>{formatAddress(customer) || "No address"}</td>
+
+                        <td>{formatDate(customer.lastOrderDate)}</td>
+
+                        <td>{customer.totalOrders ?? 0}</td>
+                      </tr>
+                    ))}
+
+                    {Array.from(
+                      {
+                        length: Math.max(EMPTY_ROW_COUNT - customers.length, 0),
+                      },
+                      (_, index) => (
+                        <tr
+                          className="customer-table__empty-row"
+                          key={`empty-row-${index}`}
+                          aria-hidden="true"
+                        >
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                        </tr>
+                      ),
+                    )}
+                  </tbody>
+                </table>
+
+                {customers.length === 0 && (
+                  <p className="customer-table__empty-message">
+                    No customers were found.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+    </div>
   );
 };
 
