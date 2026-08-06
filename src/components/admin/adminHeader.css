@@ -1,0 +1,102 @@
+/* Admin header*/
+
+.admin-header {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.admin-header__top {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 0 24px;
+}
+
+.admin-header__brand {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-family: inherit;
+  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.admin-header__account,
+.admin-header__cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #111;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.admin-header__cart {
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.admin-header__sign-out {
+  border: none;
+  background: transparent;
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-header__sign-out:hover {
+  opacity: 0.7;
+}
+
+.admin-navigation {
+  min-height: 52px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(24px, 6vw, 70px);
+  padding: 0 24px;
+  background: #050505;
+}
+
+.admin-navigation__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: clamp(0.95rem, 1.5vw, 1.13rem);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.admin-navigation__link:hover {
+  opacity: 0.75;
+}
+
+.admin-navigation__link--active {
+  opacity: 1;
+}

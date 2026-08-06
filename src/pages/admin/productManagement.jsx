@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ChevronDown,
   ChevronUp,
@@ -14,6 +14,7 @@ import ProductCard from "../../components/admin/ProductCard";
 import { useAccount } from "../../context/accountContext";
 import { shoesData } from "../../data/shoesData";
 import { useProducts } from "../../context/productContext";
+import AdminHeader from "../../components/admin/adminHeader";
 
 import "./productManagement.css";
 
@@ -147,69 +148,7 @@ const ProductManagement = () => {
 
   return (
     <div className="admin-page">
-      <header className="admin-header">
-        <div className="admin-header__top">
-          <button
-            className="admin-header__brand"
-            type="button"
-            onClick={() => navigate("/admin/products")}
-          >
-            Shoes Market Admin Dashboard
-          </button>
-
-          <div className="admin-header__actions">
-            <div className="admin-header__account">
-              <UserRound size={22} aria-hidden="true" />
-
-              <span>{currentAccount?.name ?? "Store Admin"}</span>
-            </div>
-
-            <button
-              className="admin-header__sign-out"
-              type="button"
-              onClick={handleLogout}
-            >
-              <LogOut size={18} aria-hidden="true" />
-              <span>Sign Out</span>
-            </button>
-
-            <button
-              className="admin-header__cart"
-              type="button"
-              onClick={() => navigate("/cart")}
-            >
-              <ShoppingCart size={22} aria-hidden="true" />
-              <span>Cart</span>
-            </button>
-          </div>
-        </div>
-
-        <nav className="admin-navigation" aria-label="Admin navigation">
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "admin-navigation__link admin-navigation__link--active"
-                : "admin-navigation__link"
-            }
-            to="/admin/products"
-          >
-            Product Management
-          </NavLink>
-
-          <NavLink className="admin-navigation__link" to="/admin/customers">
-            Customer Management
-          </NavLink>
-
-          <NavLink className="admin-navigation__link" to="/admin/orders">
-            Order Management
-          </NavLink>
-
-          <NavLink className="admin-navigation__link" to="/admin/profile">
-            Profile
-          </NavLink>
-        </nav>
-      </header>
-
+      <AdminHeader />
       <main className="product-management">
         <h1 className="product-management__title">Product Management</h1>
 

@@ -1,0 +1,29 @@
+.management-page {
+  min-height: 100vh;
+}
+
+.management-page__heading {
+  padding: 30px;
+  text-align: center;
+}
+
+.management-page__background {
+  padding: 40px;
+}
+
+.management-table-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.management-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.management-table th,
+.management-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
