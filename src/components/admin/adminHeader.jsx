@@ -85,17 +85,6 @@ const AdminHeader = () => {
         >
           Order Management
         </NavLink>
-
-        <NavLink
-          to="/admin/profile"
-          className={({ isActive }) =>
-            isActive
-              ? "admin-navigation__link admin-navigation__link--active"
-              : "admin-navigation__link"
-          }
-        >
-          Profile
-        </NavLink>
       </nav>
     </header>
   );
