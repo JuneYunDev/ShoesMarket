@@ -1,11 +1,10 @@
 # Shoes Online Market
 
-Shoes Market is a responsive e-commerce web application built with React and Vite.
+Shoes Market is a responsive e-commerce web application built with React and Vite based on a custom Figma design.
 
-It provides essential shopping features including product browsing, filtering, cart management, checkout, and account pages. It also includes an admin dashboard for managing products, customers, and orders, with Supabase used for database integration.
+It includes product browsing, filtering, cart management, checkout, and an admin dashboard for managing products, customers, and orders. The project integrates Supabase for database management and implements CRUD (Create, Read, Update, Delete) operations for managing application data.
 
-This project demonstrates my experience with React component architecture, state management, routing, responsive UI development, and database integration.
-
+This project demonstrates my experience with React, state management, routing, responsive UI development, CRUD functionality, and database integration.
 ## Technologies
 - React
 - JavaScript
