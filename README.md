@@ -17,13 +17,13 @@ I also wanted to practice turning a Figma design into a responsive React applica
 This project helped me better understand how multiple parts of an e-commerce website work together, including customer-facing pages, cart and checkout flows, product management, customer management, and order management.
 
 ## Technologies
--React
--JavaScript
--HTML
--CSS
--Supabase
--Git and GitHub
--Figma
+- React
+- JavaScript
+- HTML
+- CSS
+- Supabase
+- Git and GitHub
+- Figma
 
 ## Database UML Diagram (by Lucidchart)
 <img width="1294" height="583" alt="스크린샷 2026-07-28 223855" src="https://github.com/user-attachments/assets/1d1cb4a9-25d4-41a0-aabc-529d5ab8b35f" />
