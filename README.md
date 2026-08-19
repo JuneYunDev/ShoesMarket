@@ -14,6 +14,9 @@ This project demonstrates my experience with React, state management, routing, r
 - Git and GitHub
 - Figma
 
+## Live Demo
+https://shoes.juneyun.tech/
+
 ## UI Design
 
 The application was first designed in Figma before implementation. This helped me define the layout and user interactions before writing any code.
