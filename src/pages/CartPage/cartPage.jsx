@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/layout/Header";
+import Header from "../../components/layout/header";
 import { useCart } from "../../context/cartContext";
 
 import "./cartPage.css";

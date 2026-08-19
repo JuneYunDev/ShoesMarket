@@ -2,12 +2,12 @@ import { useMemo, useState } from "react";
 import { ChevronUp, Search, SlidersHorizontal } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 
-import ProductCard from "../../components/products/ProductCard";
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
+import ProductCard from "../../components/products/productCard";
+import Header from "../../components/layout/header";
+import Footer from "../../components/layout/footer";
 import { useProducts } from "../../context/productContext";
 
-import "./ProductListPage.css";
+import "./productListPage.css";
 
 const sizeOptions = [
   1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
