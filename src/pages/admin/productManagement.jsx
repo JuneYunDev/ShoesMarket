@@ -10,7 +10,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-import ProductCard from "../../components/admin/ProductCard";
+import ProductCard from "../../components/admin/productCard";
 import { useAccount } from "../../context/accountContext";
 import { shoesData } from "../../data/shoesData";
 import { useProducts } from "../../context/productContext";

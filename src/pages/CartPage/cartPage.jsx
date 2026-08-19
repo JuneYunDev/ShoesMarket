@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/layout/Header";
 import { useCart } from "../../context/cartContext";
 
-import "./CartPage.css";
+import "./cartPage.css";
 
 const CartPage = () => {
   const navigate = useNavigate();

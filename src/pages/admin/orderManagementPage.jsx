@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import AdminHeader from "../../components/admin/AdminHeader";
+import AdminHeader from "../../components/admin/adminHeader";
 import { getOrders, updateOrderStatus } from "../../services/orderService";
 
 import "./orderManagement.css";
